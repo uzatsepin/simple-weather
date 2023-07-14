@@ -22,7 +22,7 @@ const todayDate = new Date().toLocaleString("en-EN", {
       class="pic-main"
     ></div>
     <div class="weather">
-      <div class="temp">{{ (Math.round(weatherInfo?.main.temp), 0) }} °C</div>
+      <div class="temp">{{ Math.round(weatherInfo?.main.temp) }} °C</div>
       <div class="weather-desc text-block">
         {{ capitalazeFirstLetter(weatherInfo?.weather[0].description) }}
       </div>
