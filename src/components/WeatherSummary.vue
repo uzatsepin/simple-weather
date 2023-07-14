@@ -1,33 +1,37 @@
 <script setup>
-import {capitalazeFirstLetter} from '../utils'
+import { capitalazeFirstLetter } from "../utils";
 const props = defineProps({
-    weatherInfo: {
-        type: [Object, null],
-        required: true,
-    }
-})
+  weatherInfo: {
+    type: [Object, null],
+    required: true,
+  },
+});
+
+const todayDate = new Date().toLocaleString("en-EN", {
+  weekday: "short",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
 </script>
 
 <template>
-    <div v-if="weatherInfo?.weather" class="summary">
-        <div :style="`background-image: url('/src/assets/img/weather-main/${weatherInfo?.weather[0].description}.png');`"
-            class="pic-main"></div>
-        <div class="weather">
-            <div class="temp">
-                {{ Math.round(weatherInfo?.main.temp), 0 }} °C
-            </div>
-            <div class="weather-desc text-block">
-                {{ capitalazeFirstLetter(weatherInfo?.weather[0].description) }}
-            </div>
-        </div>
-        <div class="city text-block">
-            Paris,
-            FR
-        </div>
-        <div class="date text-block">
-            Thu, March 16, 2023
-        </div>
+  <div v-if="weatherInfo?.weather" class="summary">
+    <div
+      :style="`background-image: url('/src/assets/img/weather-main/${weatherInfo?.weather[0].description}.png');`"
+      class="pic-main"
+    ></div>
+    <div class="weather">
+      <div class="temp">{{ (Math.round(weatherInfo?.main.temp), 0) }} °C</div>
+      <div class="weather-desc text-block">
+        {{ capitalazeFirstLetter(weatherInfo?.weather[0].description) }}
+      </div>
     </div>
+    <div class="city text-block">
+      {{ weatherInfo?.name }}, {{ weatherInfo?.sys?.country }}
+    </div>
+    <div class="date text-block">{{ todayDate }}</div>
+  </div>
 </template>
 
 <style lang="sass" scoped>
@@ -89,5 +93,4 @@ const props = defineProps({
     width: 15px
     height: 15px
     background-image: url('/src/assets/img/calendar.svg')
-
 </style>

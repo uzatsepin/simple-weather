@@ -1,98 +1,92 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import WeatherSummary from './components/WeatherSummary.vue';
-import Highlights from './components/Highlights.vue';
-import {API_KEY, BASE_URL} from './constants';
+import { ref, onMounted } from "vue";
+import WeatherSummary from "./components/WeatherSummary.vue";
+import Highlights from "./components/Highlights.vue";
+import { API_KEY, BASE_URL } from "./constants";
 
-const city = ref('Kyiv');
+const city = ref("Kyiv");
 const weatherInfo = ref(null);
 
 function getWeather() {
   fetch(`${BASE_URL}?q=${city.value}&units=metric&appid=${API_KEY}`)
-  .then((response) => response.json())
-  .then((data) => weatherInfo.value = data)
+    .then((response) => response.json())
+    .then((data) => (weatherInfo.value = data));
 }
 
-onMounted(getWeather)
-
+onMounted(getWeather);
 </script>
 
 <template>
-    <div class="page">
-      <main class="main">
-        <div class="container">
-          <div class="laptop">
-            <div class="sections">
-              <section class="section section-left">
-                <div class="info">
-                  <div class="city-inner">
-                    <input 
-                      type="text" class="search" 
-                      v-model="city"
-                      @keyup.enter="getWeather"
-                      >
-                  </div>
-                  <WeatherSummary :weatherInfo="weatherInfo" />
+  <div class="page">
+    <main class="main">
+      <div class="container">
+        <div class="laptop">
+          <div class="sections">
+            <section class="section section-left">
+              <div class="info">
+                <div class="city-inner">
+                  <input
+                    type="text"
+                    class="search"
+                    v-model="city"
+                    @keyup.enter="getWeather"
+                  />
                 </div>
-              </section>
-              <section class="section section-right">
-                <Highlights />
-              </section> 
-            </div>
-            <div class="sections">
-              <section class="section-bottom">
-                <div
-                  class="block-bottom"
-                >
-                  <div class="block-bottom-inner">
-                    <div class="block-bottom-pic pic-coords"></div>
-                    <div class="block-bottom-texts">
-                      <div class="block-bottom-text-block">
-                        <div class="block-bottom-text-block-title">
-                          Longitude: 2.3488
-                        </div>
-                        <div class="block-bottom-text-block-desc">
-                          Longitude measures distance east or west of the prime meridian.
-                        </div>
+                <WeatherSummary :weatherInfo="weatherInfo" />
+              </div>
+            </section>
+            <section class="section section-right">
+              <Highlights />
+            </section>
+          </div>
+          <div class="sections">
+            <section class="section-bottom">
+              <div class="block-bottom">
+                <div class="block-bottom-inner">
+                  <div class="block-bottom-pic pic-coords"></div>
+                  <div class="block-bottom-texts">
+                    <div class="block-bottom-text-block">
+                      <div class="block-bottom-text-block-title">Longitude: 2.3488</div>
+                      <div class="block-bottom-text-block-desc">
+                        Longitude measures distance east or west of the prime meridian.
                       </div>
-                      <div class="block-bottom-text-block">
-                        <div class="block-bottom-text-block-title">
-                          Latitude: 48.8534
-                        </div>
-                        <div class="block-bottom-text-block-desc">
-                          Latitude lines start at the equator (0 degrees latitude) and run east and west, parallel to the equator. 
-                        </div>
+                    </div>
+                    <div class="block-bottom-text-block">
+                      <div class="block-bottom-text-block-title">Latitude: 48.8534</div>
+                      <div class="block-bottom-text-block-desc">
+                        Latitude lines start at the equator (0 degrees latitude) and run
+                        east and west, parallel to the equator.
                       </div>
                     </div>
                   </div>
                 </div>
-              </section>
-              <section class="section-bottom">
-                <div
-                  class="block-bottom"
-                >
-                  <div class="block-bottom-inner">
-                    <div class="block-bottom-pic pic-humidity"></div>
-                    <div class="block-bottom-texts">
-                      <div class="block-bottom-text-block">
-                        <div class="block-bottom-text-block-title">
-                          Humidity: 60 %
-                        </div>
-                        <div class="block-bottom-text-block-desc">
-                          Humidity is the concentration of water vapor present in the air. Water vapor, the gaseous state of water, is generally invisible to the human eye.
-                          <br /><br />
-                          The same amount of water vapor results in higher relative humidity in cool air than warm air.
-                        </div>
+              </div>
+            </section>
+            <section class="section-bottom">
+              <div class="block-bottom">
+                <div class="block-bottom-inner">
+                  <div class="block-bottom-pic pic-humidity"></div>
+                  <div class="block-bottom-texts">
+                    <div class="block-bottom-text-block">
+                      <div class="block-bottom-text-block-title">Humidity: 60 %</div>
+                      <div class="block-bottom-text-block-desc">
+                        Humidity is the concentration of water vapor present in the air.
+                        Water vapor, the gaseous state of water, is generally invisible to
+                        the human eye.
+                        <br /><br />
+                        The same amount of water vapor results in higher relative humidity
+                        in cool air than warm air.
                       </div>
                     </div>
                   </div>
                 </div>
-              </section>
-            </div>
+              </div>
+            </section>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
+  </div>
 </template>
 
 <style lang="sass" scoped>
